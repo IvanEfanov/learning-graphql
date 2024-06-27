@@ -1,0 +1,47 @@
+scalar Date
+scalar BigDecimal
+
+# Книга
+type Book {
+    id: ID!
+    # Название книги
+    name: String!
+    # Автор книги
+    author: Author!
+    # Цена
+    price: BigDecimal!
+}
+
+# Автор книги
+type Author {
+    id: ID!
+    # Имя автора
+    firstName: String!
+    # Фамилия автора
+    lastName: String!
+    # Дата рождения
+    birthDate: Date!
+}
+
+# Публичные методы GraphQL для чтения данных
+type Query {
+    # Список книг
+    allBooks(limit: Int!): [Book]
+    # Получить книгу по её id
+    getBookById(id: Int!): Book!
+}
+
+# Публичные методы GraphQL для изменения данных
+type Mutation {
+    # Добавление нового автора
+    createAuthor(author: AuthorCreationRequest!): Author!
+}
+
+input AuthorCreationRequest {
+    # Имя автора
+    firstName: String!
+    # Фамилия автора
+    lastName: String!
+    # Дата рождения
+    birthDate: Date!
+}
